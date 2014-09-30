@@ -1,0 +1,6 @@
+<% if @context.is_a?(Business) %>
+<h1>New Interaction for <%= @context.name %></h1>
+<% else %>
+<h1>New Interaction for <%= @context.first_name %></h1>
+<% end %>
+<%= render "form" %>
