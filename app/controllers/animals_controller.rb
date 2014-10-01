@@ -1,6 +1,6 @@
 class AnimalsController < ApplicationController
   before_action :set_race
-
+  before_action :set_animal, only: [:show, :edit, :update, :destroy]
   def index
     @animals = race_class.all
   end
@@ -8,6 +8,7 @@ class AnimalsController < ApplicationController
   end
 
   def new
+    @animal = race_class.new
   end
 
   def edit
@@ -17,12 +18,20 @@ class AnimalsController < ApplicationController
   end
 
   def update
+    if @animal.update(animal_params)
+      redirect_to @animal, notice: "#{race} was successfully created."
+    else
+      render action: 'edit'
+    end
   end
 
   def destroy
+    @animal.destroy
+    redirect_to animals_url
   end
 
   private
+
     def set_race
       @race = race
     end
@@ -37,6 +46,10 @@ class AnimalsController < ApplicationController
 
   def race_class
     race.constantize
+  end
+
+  def set_animal
+    @animal = race_class.find(params[:id])
   end
 
 end
