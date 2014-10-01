@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-resources :people do 
-    resources :interactions, only: [:new, :create, :edit, :update]
+
+  resources :people do
+      resources :interactions, only: [:new, :create, :edit, :update]
   end
 
   resources :businesses do
     resources :interactions, only: [:new, :create, :edit, :update]
   end
+  resources :animals
+  resources :lions, controller: 'animals', type: 'Lion'
+  resources :meerkats, controller: 'animals', type: 'Meerkat'
+  resources :wild_boars, controller: 'animals', type: 'WildBoar'
 
   root to: "people#index"
 
