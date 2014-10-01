@@ -4,7 +4,7 @@ self.inheritance_column = :race
 scope :lions, -> { where(race: 'Lion') } 
 scope :meerkats, -> { where(race: 'Meerkat') } 
 scope :wild_boars, -> { where(race: 'WildBoar') }
-scope :races, -> { all.map(&:race).compact }
+scope :races, -> { all.uniq{|x| x.race}.collect(&:race).compact }
 
 def talk 
     raise 'Abstract Method' 
